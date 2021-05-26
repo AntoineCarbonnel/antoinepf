@@ -18,10 +18,10 @@
         <v-tab
           v-for="link in links"
           :key="link.name"
+          :id="link.name"
+          v-on:click="changeColumnFocus(link.name)"
         >
-          <a v-on:click="changeColumnSize(link.name)" :href="'#' + link.name.toLowerCase()">
-            {{ link.name }}
-          </a>
+          {{ link.name }}
         </v-tab>
       </v-tabs>
 
@@ -44,8 +44,8 @@ export default {
     }
   },
   methods: {
-    changeColumnSize(name) {
-      this.$store.commit('changeColumnSize', name)
+    changeColumnFocus(name) {
+      this.$store.dispatch('changeColumnFocus', name)
     }
   },
   created() {
@@ -55,18 +55,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-tab {
-  padding: 0;
-  margin: 0 16px;
-  a {
-    color: unset;
-    text-decoration: none;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
+
 
 </style>

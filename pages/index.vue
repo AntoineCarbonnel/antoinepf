@@ -11,6 +11,7 @@
           <v-sheet
             rounded="lg"
             :min-height="column.height + 'vh'"
+            v-on:click="changeColumnFocus(column.name)"
           >
             <component :is="column.name"></component>
           </v-sheet>
@@ -28,6 +29,11 @@ export default {
       components: []
     }
   },
+  methods: {
+    changeColumnFocus(name) {
+      this.$store.dispatch('changeColumnFocus', name)
+    }
+  },
   computed: {
     columns() {
       return this.$store.getters.getLinks
@@ -39,10 +45,16 @@ export default {
 <style lang="scss">
 .col-12{
   transition: .5s;
-}
-.v-sheet {
-  transition: .5s;
 
+  .v-sheet {
+    transition: .5s;
+  }
+}
+
+.col-sm-2 {
+  .v-sheet{
+    cursor: pointer;
+  }
 }
 
 </style>
